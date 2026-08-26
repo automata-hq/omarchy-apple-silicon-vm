@@ -1,0 +1,12 @@
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -1330,6 +1330,9 @@
+         [window setTitle:qemu_name ? [NSString stringWithFormat:@"QEMU %s", qemu_name] : @"QEMU"];
+         [window setContentView:cocoaView];
+         [window makeKeyAndOrderFront:self];
++        if (getenv("QEMU_COCOA_MINIMIZE")) {
++            [window miniaturize:self];
++        }
+         [window center];
+         [window setDelegate: self];
+ 

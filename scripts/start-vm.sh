@@ -7,6 +7,12 @@ DIR="$HOME/omarchy-vm"
 QEMU="$DIR/qemu-gpu2/bin/qemu-system-aarch64"
 EDK2="$DIR/qemu-gpu2/share/qemu/edk2-aarch64-code.fd"
 
+# HEADLESS=1: window starts miniaturized in the Dock (GL context stays alive,
+# GPU compositing keeps working; click the Dock icon to peek).
+if [ "${HEADLESS:-0}" = "1" ]; then
+  export QEMU_COCOA_MINIMIZE=1
+fi
+
 if [ -f "$DIR/qemu.pid" ] && kill -0 "$(cat "$DIR/qemu.pid")" 2>/dev/null; then
   echo "VM already running (pid $(cat "$DIR/qemu.pid"))"
   exit 0

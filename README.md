@@ -112,8 +112,12 @@ sudo systemctl enable --now sshd
 ### 5. Run it
 
 ```sh
-./scripts/start-vm.sh    # native cocoa window opens
-./scripts/stop-vm.sh     # graceful shutdown
+./scripts/start-vm.sh            # native cocoa window opens
+HEADLESS=1 ./scripts/start-vm.sh # GPU mode, window miniaturized in the Dock —
+                                 # full acceleration, zero screen clutter
+                                 # (agents drive via SSH/grim; click the Dock
+                                 #  icon any time to peek)
+./scripts/stop-vm.sh             # graceful shutdown
 ```
 
 <div align="center">

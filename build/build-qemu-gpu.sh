@@ -18,6 +18,8 @@ cd "qemu-$SHA"
 echo "== apply patches"
 patch -p1 --batch --forward -r /dev/null < "$REPO/patches/vendor/qemu-texture-borrowing.patch" || true
 patch -p1 --batch --forward -r /dev/null < "$REPO/patches/vendor/gpu-spike-resolution-fix.patch" || true
+patch -p1 --batch --forward -r /dev/null < "$REPO/patches/virtio-gpu-edid-120hz.patch" || true
+patch -p1 --batch --forward -r /dev/null < "$REPO/patches/cocoa-minimize-headless.patch" || true
 
 echo "== configure"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/virglrenderer/lib/pkgconfig:/opt/homebrew/opt/libepoxy/lib/pkgconfig:/opt/homebrew/opt/angle/lib/pkgconfig:/opt/homebrew/lib/pkgconfig"
