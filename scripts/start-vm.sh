@@ -29,7 +29,7 @@ exec "$QEMU" \
   -drive if=pflash,format=raw,file="$DIR/efi_vars_64m.fd" \
   -drive file="$DIR/omarchy.qcow2",if=virtio,format=qcow2,cache=writeback \
   -device virtio-net-pci,netdev=net0 \
-  -netdev user,id=net0,hostfwd=tcp:127.0.0.1:2222-:22 \
+  -netdev user,id=net0,hostfwd=tcp:127.0.0.1:2222-:22,hostfwd=tcp:127.0.0.1:5901-:5901 \
   -device virtio-gpu-gl-pci,xres=1920,yres=1200 \
   -device virtio-tablet-pci \
   -device virtio-keyboard-pci \
