@@ -94,6 +94,7 @@ guest (default login `omarchy`/`omarchy` — **change it**):
 | `uwsm/env.d/30-qt-software` | `~/.config/uwsm/env.d/` | bar/shell via Qt raster (see caveats) |
 | `hypr/monitors.lua` | `~/.config/hypr/` | `preferred` mode → 120 Hz |
 | `hypr/input.lua` | `~/.config/hypr/` | US keyboard layout (image ships with `es`) |
+| `systemd-user/wayvnc.service` | `~/.config/systemd/user/` | VNC for Screen Sharing — `loginctl enable-linger $USER && systemctl --user enable --now wayvnc` |
 
 Then, from the UEFI shell (a USB keyboard is attached for exactly this),
 fix the boot entry once so the VM auto-boots forever:
@@ -170,8 +171,9 @@ ssh -p 2222 omarchy@127.0.0.1 'hyprctl ...'           # or in-guest control
   are pinned to raster (`QT_QUICK_BACKEND=software`). In practice: fast,
   stable, smooth 120 Hz — app contents just render on llvmpipe (which, on an
   M-series, is honestly fine for terminals and UI).
-- No VNC in the GL build (VNC conflicts with the GL context). cocoa window or
-  in-guest capture only.
+- QEMU-level VNC conflicts with the GL context, so VNC is served by **wayvnc
+  inside the guest** instead: `open vnc://127.0.0.1:5901` — the real
+  GPU-composited desktop, works headless (see `guest-config/systemd-user/`).
 - Software cursor is intentional (`WLR_NO_HARDWARE_CURSORS=1`).
 - This is a stack of patches on pinned source, not a product. It works great
   on the machine it was built on (M3 Ultra / macOS Tahoe); YMMV elsewhere —
