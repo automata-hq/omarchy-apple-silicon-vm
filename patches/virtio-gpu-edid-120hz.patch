@@ -1,0 +1,13 @@
+--- a/hw/display/virtio-gpu-base.c
++++ b/hw/display/virtio-gpu-base.c
+@@ -64,7 +64,9 @@
+         .height_mm = g->req_state[scanout].height_mm,
+         .prefx = g->req_state[scanout].width,
+         .prefy = g->req_state[scanout].height,
+-        .refresh_rate = g->req_state[scanout].refresh_rate,
++        .refresh_rate = g->req_state[scanout].refresh_rate
++            ? g->req_state[scanout].refresh_rate
++            : 120000,
+     };
+ 
+     for (output_idx = 0, node = g->conf.outputs;

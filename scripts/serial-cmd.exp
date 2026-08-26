@@ -1,0 +1,25 @@
+#!/usr/bin/expect -f
+# Drive the guest serial console: log in as omarchy, run the given command,
+# print everything. Usage: serial_cmd.exp "command"
+set timeout 25
+set send_slow {1 .01}
+set cmd [lindex $argv 0]
+spawn nc -U [file join $env(HOME) omarchy-vm serial.sock]
+send "\r"
+expect {
+    -re "login:" {
+        send "omarchy\r"
+        expect -re "(P|p)assword"
+        send "omarchy\r"
+    }
+    -re {❯} {}
+}
+expect -re {❯}
+send -s "$cmd; echo CMD_DONE_MARKER\r"
+expect "CMD_DONE_MARKER"
+expect {
+    -re {❯} {}
+    timeout {}
+}
+send "exit\r"
+expect eof
