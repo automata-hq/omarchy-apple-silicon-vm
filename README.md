@@ -93,6 +93,7 @@ guest (default login `omarchy`/`omarchy` — **change it**):
 | `uwsm/env.d/20-vm-graphics` | `~/.config/uwsm/env.d/` | same, for the uwsm session |
 | `uwsm/env.d/30-qt-software` | `~/.config/uwsm/env.d/` | bar/shell via Qt raster (see caveats) |
 | `hypr/monitors.lua` | `~/.config/hypr/` | `preferred` mode → 120 Hz |
+| `hypr/input.lua` | `~/.config/hypr/` | US keyboard layout (image ships with `es`) |
 
 Then, from the UEFI shell (a USB keyboard is attached for exactly this),
 fix the boot entry once so the VM auto-boots forever:
