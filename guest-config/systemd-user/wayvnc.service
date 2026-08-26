@@ -3,9 +3,7 @@ Description=wayvnc VNC server for Hyprland
 
 [Service]
 Environment=XDG_RUNTIME_DIR=/run/user/1001 WAYLAND_DISPLAY=wayland-1
-# NOTE: must bind 0.0.0.0 (not 127.0.0.1) — QEMU slirp hostfwd targets
-# the guest NAT address (10.0.2.15), so guest-localhost is unreachable.
-ExecStart=/usr/bin/wayvnc 0.0.0.0 5901
+ExecStart=/usr/bin/wayvnc --max-fps=120 --render-cursor --keyboard=us --gpu 0.0.0.0 5901
 Restart=always
 RestartSec=3
 

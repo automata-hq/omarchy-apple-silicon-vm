@@ -172,8 +172,10 @@ ssh -p 2222 omarchy@127.0.0.1 'hyprctl ...'           # or in-guest control
   stable, smooth 120 Hz — app contents just render on llvmpipe (which, on an
   M-series, is honestly fine for terminals and UI).
 - QEMU-level VNC conflicts with the GL context, so VNC is served by **wayvnc
-  inside the guest** instead: `open vnc://127.0.0.1:5901` — the real
-  GPU-composited desktop, works headless (see `guest-config/systemd-user/`).
+  inside the guest** instead — the real GPU-composited desktop, works
+  headless. wayvnc's auth is RA2/RSA-AES, which macOS Screen Sharing does
+  not support; use TigerVNC (`brew install --cask tigervnc`) and connect to
+  `127.0.0.1:5901`. Service: `guest-config/systemd-user/wayvnc.service`.
 - Software cursor is intentional (`WLR_NO_HARDWARE_CURSORS=1`).
 - This is a stack of patches on pinned source, not a product. It works great
   on the machine it was built on (M3 Ultra / macOS Tahoe); YMMV elsewhere —
