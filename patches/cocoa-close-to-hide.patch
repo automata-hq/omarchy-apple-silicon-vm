@@ -1,0 +1,14 @@
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -1423,6 +1423,11 @@
+ - (BOOL)windowShouldClose:(id)sender
+ {
+     COCOA_DEBUG("QemuCocoaAppController: windowShouldClose\n");
++    if (getenv("QEMU_COCOA_MINIMIZE")) {
++        /* headless mode: red button hides the window instead of quitting */
++        [sender miniaturize: sender];
++        return NO;
++    }
+     [NSApp terminate: sender];
+     /* If the user allows the application to quit then the call to
+      * NSApp terminate will never return. If we get here then the user
